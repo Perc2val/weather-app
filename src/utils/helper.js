@@ -8,4 +8,5 @@ async function formatAddress(){
     return s2
 }
 
-export {formatAddress}
+export {formatAddress, 
+}

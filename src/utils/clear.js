@@ -16,4 +16,12 @@ function clearMainToday(){
 }
 }
 
-export {clearSupport, clearMainToday}
+function clearMainWeek(){
+const myNode = document.querySelector(".week")
+  while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+  
+}
+}
+
+export {clearSupport, clearMainToday, clearMainWeek}
