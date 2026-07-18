@@ -7,13 +7,6 @@ async function getWeatherData(location){
         let response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=ZLASJEDP5KQNPTUYSAYD5EVGH`)
         data = await response.json();
         currentLocation = location;
-            let currentTemp = data.currentConditions.temp;
-            let currentUV = data.currentConditions.uvindex;
-        let currentConditions = {currentTemp, currentUV,};
-            let dayTodayTempMax = data.days[0].tempmax;
-            let dayTodayTempMin = data.days[0].tempmin;
-            let dayTodayUV = data.days[0].uvindex;
-        let dayToday = {dayTodayTempMax, dayTodayTempMin, dayTodayUV};
             let dayTwoTempMax = data.days[1].tempmax;
             let dayTwoTempMin = data.days[1].tempmin;
             let dayTwoUV = data.days[1].uvindex;
@@ -33,7 +26,7 @@ async function getWeatherData(location){
 
     console.log(data)
 
-    return currentConditions, dayToday, dayTwo, dayThree, dayFour, dayFive
+    return dayTwo, dayThree, dayFour, dayFive
 
     } catch {
         getWeatherData(currentLocation);
@@ -42,12 +35,28 @@ async function getWeatherData(location){
 }
 
 function getSupportData(){
-        let address = data.address;
         let longitude = data.longitude;
         let latitude = data.latitude;
         let currentTime = data.currentConditions.datetime;
-    let supportInfo = {address, longitude, latitude, currentTime};
+    let supportInfo = {longitude, latitude, currentTime};
     return supportInfo;
 }
-export {getWeatherData, getSupportData}
+
+function getTodayData(){
+        let currentTemp = data.currentConditions.temp;
+        let currentInfo = data.currentConditions.conditions;
+        let dayTodayTempMax = data.days[0].tempmax;
+        let dayTodayTempMin = data.days[0].tempmin;
+        let dayTodayUV = data.days[0].uvindex;
+    let dayToday = {dayTodayTempMax, dayTodayTempMin, dayTodayUV, currentTemp, currentInfo};
+
+    return dayToday
+}
+
+function getAdress(){
+    let address = data.address
+    let addressObj = {address}
+    return addressObj
+}
+export {getWeatherData, getSupportData, getTodayData, getAdress}
 
